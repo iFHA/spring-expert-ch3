@@ -2,6 +2,7 @@ package dev.fernando.movieflix.entities;
 
 import java.util.Objects;
 
+import dev.fernando.movieflix.dto.ReviewDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +40,17 @@ public class Review {
         this.text = text;
         this.movie = movie;
         this.user = user;
+    }
+    
+    public Review(ReviewDTO dto) {
+        this.id = dto.getId();
+        this.text = dto.getText();
+        this.movie = new Movie();
+        this.movie.setId(dto.getMovieId());
+        this.user = new User();
+        this.user.setId(dto.getUserId());
+        this.user.setName(dto.getUserName());
+        this.user.setEmail(dto.getUserEmail());
     }
 
     public Long getId() {
